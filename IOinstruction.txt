@@ -1,0 +1,59 @@
+This document describes the input required to run deform2.py. 
+
+The input is free format, with either commas or spaces separating either entry.
+
+
+********************************INPUT TO DEFORM1******************************
+Line 1
+ISTRES      Enter 1 for Settlement Calculation, 2 for Stress Calculation
+
+------- SETTLEMENT OPTION ------------------------------------------
+
+Line 2
+NSL         Number of Soil Layers
+
+Line 3
+ICODE       If inputting Preconsolidation Pressure on Line 6, enter 1;
+            if inputting OCR on Line 6, enter 2
+
+Line 4 Group - need NSL lines
+0 ELEVT(J)    Elevation of top of layer (feet)
+1 ELEVB(J)    Elevation of bottom of layer (feet)
+2 GAMMA(J)    Buoyant unit weight (pcf)
+3 CC(J)       Consolidation Ratio (already divided by 1+eo)
+4 CR(J)       Recompression Ratio (already divided by 1+eo)
+5 PC(J)       Preconsolidation Pressure (psf) or OCR, dependent of ICODE
+6 E(J)        Young's Modulus X 10^6 (psf)
+7 MU(J)       Poisson's Ratio
+8 CA(J)       Secondary Compression Ratio (strain/log year)
+9 A(J)        A-bar
+10 TZERO(J)   Time when secondary compression begins (years)
+11 ANGLE(J)   Angle between local coordinate and Cartesian coordinate (degree) 
+
+Line 5+NSL
+TFINAL      Project Life (years)
+
+Line 6+NSL
+NLA         Number of Loaded Areas
+
+Line 7+NSL Group - need NLA lines
+0 CX(I)       x-coordinate of loading area centroid (feet)
+1 CY(I)       y-coordinate of loading area centroid (feet)
+2 ELEV(I)     elevation of loading area (feet)
+3 W(I)        length of loading area in the x-direction (feet)
+4 L(I)        length of loading area in the y-direction (feet)
+5 P(I)        pressure of loading area (psf)
+
+Line 8+NSL+NLA
+IGRID       1 if grid pattern wanted, 2 if inputting X, Y coordinates
+  if IGRID = 1
+    Line 9+NSL+NLA
+    XMIN    minimum X of grid
+    XMAX    maximum X of grid
+    YMIN    minimum Y of grid
+    YMAX    maximum Y of grid
+    GRID    grid spacing
+  if IGRID = 2
+    Line 9+NSL+NLA
+    X       X-coordinate of Point of Interest
+    Y       Y-coordinate of Point of Interest
